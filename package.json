@@ -31,7 +31,8 @@
       },
       {
         "command": "pomodoro.resetTimer",
-        "title": "Reset Timer"
+        "title": "Reset",
+        "category": "Pomodoing"
       }
     ],
     "menus": {
