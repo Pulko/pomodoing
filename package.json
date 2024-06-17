@@ -21,11 +21,13 @@
     "commands": [
       {
         "command": "pomodoro.startTimer",
-        "title": "Start Timer"
+        "title": "Start/Resume",
+        "category": "Pomodoing"
       },
       {
         "command": "pomodoro.pauseTimer",
-        "title": "Pause Timer"
+        "title": "Pause",
+        "category": "Pomodoing"
       },
       {
         "command": "pomodoro.resetTimer",
@@ -37,17 +39,20 @@
         {
           "command": "pomodoro.startTimer",
           "when": "true",
-          "group": "navigation"
+          "category": "Pomodoing",
+          "shortTitle": "Start/Resume"
         },
         {
           "command": "pomodoro.pauseTimer",
           "when": "!isPomodoroStopped && !isPomodoroPaused",
-          "group": "navigation"
+          "category": "Pomodoing",
+          "shortTitle": "Pause"
         },
         {
           "command": "pomodoro.resetTimer",
           "when": "!isPomodoroStopped",
-          "group": "navigation"
+          "category": "Pomodoing",
+          "shortTitle": "Reset"
         }
       ]
     },

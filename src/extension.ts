@@ -13,6 +13,11 @@ export function activate(
       "pomodoro.startTimer",
       () => {
         pomodoroTimer.start();
+        vscode.commands.executeCommand(
+          "setContext",
+          "isPomodoroRunning",
+          true
+        );
       }
     );
 
@@ -21,6 +26,11 @@ export function activate(
       "pomodoro.pauseTimer",
       () => {
         pomodoroTimer.pause();
+        vscode.commands.executeCommand(
+          "setContext",
+          "isPomodoroRunning",
+          false
+        );
       }
     );
 
@@ -29,6 +39,11 @@ export function activate(
       "pomodoro.resetTimer",
       () => {
         pomodoroTimer.reset();
+        vscode.commands.executeCommand(
+          "setContext",
+          "isPomodoroRunning",
+          true
+        );
       }
     );
 
@@ -42,5 +57,21 @@ export function activate(
     false
   );
 }
+
+// Once we have icons, we can add them to commands and show in editor/title
+// "editor/title": [
+//   {
+//     "command": "pomodoro.pauseTimer",
+//     "alt": "pomodoro.pauseTimer",
+//     "when": "isPomodoroRunning",
+//     "group": "navigation"
+//   },
+//   {
+//     "command": "pomodoro.startTimer",
+//     "alt": "pomodoro.startTimer",
+//     "when": "!isPomodoroRunning",
+//     "group": "navigation"
+//   }
+// ]
 
 export function deactivate() {}

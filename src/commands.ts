@@ -25,6 +25,7 @@ export class PomodoroTimer {
   private workTimeLabel: string;
   private shortBreakTimeLabel: string;
   private longBreakTimeLabel: string;
+  private icon: string = "$(flame)";
 
   constructor(context: vscode.ExtensionContext) {
     this.context = context;
@@ -86,21 +87,16 @@ export class PomodoroTimer {
 
   public start(mode: StartMode = "pomodoro") {
     if (this.isPaused) {
-      this.startTime = Date.now();
       this.isPaused = false;
-      this.updateTimer();
-      return;
+    } else {
+      const config = this.getModeConfig(mode);
+      this.remainingTime = config.duration;
+      this.label = config.label;
+      this.icon = config.icon;
     }
 
-    if (this.timerInterval) {
-      return;
-    }
-
-    this.remainingTime =
-      this.getModeDuration(mode);
-    this.label = this.getModeLabel(mode);
     this.startTime = Date.now();
-    this.updateTimer();
+    this.updateTimer(true);
   }
 
   public pause() {
@@ -109,6 +105,10 @@ export class PomodoroTimer {
       this.timerInterval = undefined;
       this.isPaused = true;
       this.updateRemainingTime();
+      this.updateStatusBar();
+      vscode.window.showInformationMessage(
+        "Pomodoro timer paused."
+      );
     }
   }
 
@@ -124,13 +124,19 @@ export class PomodoroTimer {
     this.label = this.workTimeLabel;
     this.updateStatusBar();
     vscode.window.showInformationMessage(
-      "Start pomodoing again!"
+      "Pomodoro timer reset."
     );
   }
 
-  private updateTimer() {
+  private updateTimer(
+    immediate: boolean = false
+  ) {
     if (this.timerInterval) {
       clearInterval(this.timerInterval);
+    }
+
+    if (immediate) {
+      this.updateStatusBar();
     }
 
     this.timerInterval = setInterval(() => {
@@ -140,9 +146,9 @@ export class PomodoroTimer {
         clearInterval(this.timerInterval);
         this.timerInterval = undefined;
         this.handleTimerEnd();
+      } else {
+        this.updateStatusBar();
       }
-
-      this.updateStatusBar();
     }, 1000);
   }
 
@@ -178,29 +184,26 @@ export class PomodoroTimer {
     }
   }
 
-  private getModeDuration(mode: StartMode) {
+  private getModeConfig(mode: StartMode) {
     switch (mode) {
       case "pomodoro":
-        return this.pomodoroDuration;
+        return {
+          label: this.workTimeLabel,
+          duration: this.pomodoroDuration,
+          icon: "$(flame)",
+        };
       case "shortBreak":
-        return this.shortBreakDuration;
+        return {
+          label: this.shortBreakTimeLabel,
+          duration: this.shortBreakDuration,
+          icon: "$(check)",
+        };
       case "longBreak":
-        return this.longBreakDuration;
-      default:
-        return this.pomodoroDuration;
-    }
-  }
-
-  private getModeLabel(mode: StartMode) {
-    switch (mode) {
-      case "pomodoro":
-        return this.workTimeLabel;
-      case "shortBreak":
-        return this.shortBreakTimeLabel;
-      case "longBreak":
-        return this.longBreakTimeLabel;
-      default:
-        return "Pomodoro";
+        return {
+          label: this.longBreakTimeLabel,
+          duration: this.longBreakDuration,
+          icon: "$(check-all)",
+        };
     }
   }
 
@@ -208,7 +211,7 @@ export class PomodoroTimer {
     const minutes = Math.floor(
       this.remainingTime / 60000
     );
-    const seconds = Math.floor(
+    const seconds = Math.ceil(
       (this.remainingTime % 60000) / 1000
     );
     const timerString = `${minutes}:${
@@ -216,7 +219,11 @@ export class PomodoroTimer {
     }${seconds}`;
 
     vscode.window.setStatusBarMessage(
-      `${this.label}: ${timerString}`
+      `${
+        this.isPaused
+          ? "$(debug-pause)"
+          : this.icon
+      } ${this.label}: ${timerString}`
     );
   }
 }
