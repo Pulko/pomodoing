@@ -10,8 +10,12 @@
   "categories": [
     "Other"
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Pulko/pomodoing.git"
+  },
   "icon": "icons/logo/logo.png",
-  "main": "./dist/extension.js",
+  "main": "./out/extension.js",
   "activationEvents": [
     "onCommand:pomodoro.startTimer",
     "onCommand:pomodoro.pauseTimer",
