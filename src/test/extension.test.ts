@@ -1,15 +1,47 @@
-import * as assert from 'assert';
+import * as assert from "assert";
+import * as vscode from "vscode";
 
-// You can import and use all API from the 'vscode' module
-// as well as import your extension to test it
-import * as vscode from 'vscode';
-// import * as myExtension from '../../extension';
+suite("Extension Test Suite", function () {
+  test("Test if extension is activated", async () => {
+    const extension =
+      vscode.extensions.getExtension(
+        "pulko.pomodoing"
+      );
+    await extension?.activate();
 
-suite('Extension Test Suite', () => {
-	vscode.window.showInformationMessage('Start all tests.');
+    assert.ok(
+      extension?.isActive,
+      "Extension is not activated"
+    );
+  });
 
-	test('Sample test', () => {
-		assert.strictEqual(-1, [1, 2, 3].indexOf(5));
-		assert.strictEqual(-1, [1, 2, 3].indexOf(0));
-	});
+  test("Test if start command is registered", async () => {
+    const commands =
+      await vscode.commands.getCommands(true);
+
+    assert.ok(
+      commands.includes("pomodoro.startTimer"),
+      "Command is not registered"
+    );
+  });
+
+  test("Test if pause command is registered", async () => {
+    const commands =
+      await vscode.commands.getCommands(true);
+
+    assert.ok(
+      commands.includes("pomodoro.pauseTimer"),
+      "Command is not registered"
+    );
+  });
+
+  test("Test if reset command is registered", async () => {
+    const commands =
+      await vscode.commands.getCommands(true);
+
+    assert.ok(
+      commands.includes("pomodoro.resetTimer"),
+      "Command is not registered"
+    );
+  });
 });
