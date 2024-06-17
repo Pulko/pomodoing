@@ -47,20 +47,17 @@ export class PomodoroTimer {
       "Long break"
     );
     this.pomodoroDuration =
-      10000 ||
       config.get<number>("duration", 25) *
-        60 *
-        1000;
+      60 *
+      1000;
     this.shortBreakDuration =
-      5000 ||
       config.get<number>("shortBreak", 5) *
-        60 *
-        1000;
+      60 *
+      1000;
     this.longBreakDuration =
-      8000 ||
       config.get<number>("longBreak", 15) *
-        60 *
-        1000;
+      60 *
+      1000;
     this.longBreakAfter = config.get<number>(
       "longBreakAfter",
       4
