@@ -2,7 +2,7 @@
   "name": "pomodoing",
   "displayName": "Pomodoing",
   "description": "Elegant Pomodoro technic timer for developers",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "publisher": "pulko",
   "engines": {
     "vscode": "^1.90.0"
@@ -17,24 +17,24 @@
   "icon": "icons/logo/logo.png",
   "main": "./out/extension.js",
   "activationEvents": [
-    "onCommand:pomodoro.startTimer",
-    "onCommand:pomodoro.pauseTimer",
-    "onCommand:pomodoro.resetTimer"
+    "onCommand:pomodoing.startTimer",
+    "onCommand:pomodoing.pauseTimer",
+    "onCommand:pomodoing.resetTimer"
   ],
   "contributes": {
     "commands": [
       {
-        "command": "pomodoro.startTimer",
+        "command": "pomodoing.startTimer",
         "title": "Start/Resume",
         "category": "Pomodoing"
       },
       {
-        "command": "pomodoro.pauseTimer",
+        "command": "pomodoing.pauseTimer",
         "title": "Pause",
         "category": "Pomodoing"
       },
       {
-        "command": "pomodoro.resetTimer",
+        "command": "pomodoing.resetTimer",
         "title": "Reset",
         "category": "Pomodoing"
       }
@@ -42,19 +42,19 @@
     "menus": {
       "commandPalette": [
         {
-          "command": "pomodoro.startTimer",
+          "command": "pomodoing.startTimer",
           "when": "true",
           "category": "Pomodoing",
           "shortTitle": "Start/Resume"
         },
         {
-          "command": "pomodoro.pauseTimer",
+          "command": "pomodoing.pauseTimer",
           "when": "!isPomodoroStopped && !isPomodoroPaused",
           "category": "Pomodoing",
           "shortTitle": "Pause"
         },
         {
-          "command": "pomodoro.resetTimer",
+          "command": "pomodoing.resetTimer",
           "when": "!isPomodoroStopped",
           "category": "Pomodoing",
           "shortTitle": "Reset"

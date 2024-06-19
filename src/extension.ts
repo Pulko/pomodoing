@@ -4,15 +4,15 @@ import { PomodoroTimer } from "./commands";
 export function activate(
   context: vscode.ExtensionContext
 ) {
-  const pomodoroTimer = new PomodoroTimer(
+  const pomodoingTimer = new PomodoroTimer(
     context
   );
 
   const startCommand =
     vscode.commands.registerCommand(
-      "pomodoro.startTimer",
+      "pomodoing.startTimer",
       () => {
-        pomodoroTimer.start();
+        pomodoingTimer.start();
         vscode.commands.executeCommand(
           "setContext",
           "isPomodoroRunning",
@@ -23,9 +23,9 @@ export function activate(
 
   const pauseCommand =
     vscode.commands.registerCommand(
-      "pomodoro.pauseTimer",
+      "pomodoing.pauseTimer",
       () => {
-        pomodoroTimer.pause();
+        pomodoingTimer.pause();
         vscode.commands.executeCommand(
           "setContext",
           "isPomodoroRunning",
@@ -36,9 +36,9 @@ export function activate(
 
   const resetCommand =
     vscode.commands.registerCommand(
-      "pomodoro.resetTimer",
+      "pomodoing.resetTimer",
       () => {
-        pomodoroTimer.reset();
+        pomodoingTimer.reset();
         vscode.commands.executeCommand(
           "setContext",
           "isPomodoroRunning",
@@ -61,14 +61,14 @@ export function activate(
 // Once we have icons, we can add them to commands and show in editor/title
 // "editor/title": [
 //   {
-//     "command": "pomodoro.pauseTimer",
-//     "alt": "pomodoro.pauseTimer",
+//     "command": "pomodoing.pauseTimer",
+//     "alt": "pomodoing.pauseTimer",
 //     "when": "isPomodoroRunning",
 //     "group": "navigation"
 //   },
 //   {
-//     "command": "pomodoro.startTimer",
-//     "alt": "pomodoro.startTimer",
+//     "command": "pomodoing.startTimer",
+//     "alt": "pomodoing.startTimer",
 //     "when": "!isPomodoroRunning",
 //     "group": "navigation"
 //   }

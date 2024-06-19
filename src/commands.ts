@@ -104,7 +104,7 @@ export class PomodoroTimer {
       this.updateRemainingTime();
       this.updateStatusBar();
       vscode.window.showInformationMessage(
-        "Pomodoro timer paused."
+        "Timer paused."
       );
     }
   }
@@ -121,7 +121,7 @@ export class PomodoroTimer {
     this.label = this.workTimeLabel;
     this.updateStatusBar();
     vscode.window.showInformationMessage(
-      "Pomodoro timer reset."
+      "Timer reset."
     );
   }
 

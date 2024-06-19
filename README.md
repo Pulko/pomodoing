@@ -25,6 +25,21 @@ Pomodoing is a Visual Studio Code extension that allows you to work with Pomodor
 3. You may see a countdown with a current state in the bottom panel of your VSCode.
 4. The extension will change the states eventually.
 
+### Additional Commands
+
+- `Pomodoing: Pause` - Pauses the timer.
+- `Pomodoing: Reset` - Resets the timer and starts from the beginning.
+
+<img width="1256" height="320" src="assets/commands.png">
+
+### Indications
+
+- **Work**: The timer is running and you should be working.
+  <img width="260" height="50" src="assets/work_time.png">
+
+- **Pause**: The timer is paused and you can take a break.
+  <img width="260" height="50" src="assets/pause_time.png">
+
 ## Requirements
 
 - Visual Studio Code

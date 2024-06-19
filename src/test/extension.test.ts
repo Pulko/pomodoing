@@ -20,7 +20,7 @@ suite("Extension Test Suite", function () {
       await vscode.commands.getCommands(true);
 
     assert.ok(
-      commands.includes("pomodoro.startTimer"),
+      commands.includes("pomodoing.startTimer"),
       "Command is not registered"
     );
   });
@@ -30,7 +30,7 @@ suite("Extension Test Suite", function () {
       await vscode.commands.getCommands(true);
 
     assert.ok(
-      commands.includes("pomodoro.pauseTimer"),
+      commands.includes("pomodoing.pauseTimer"),
       "Command is not registered"
     );
   });
@@ -40,7 +40,7 @@ suite("Extension Test Suite", function () {
       await vscode.commands.getCommands(true);
 
     assert.ok(
-      commands.includes("pomodoro.resetTimer"),
+      commands.includes("pomodoing.resetTimer"),
       "Command is not registered"
     );
   });
